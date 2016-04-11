@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gems</title>
+	<style type="text/css">
+		.gemImage
+		{
+			width: 80px;
+			height: 80px;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+
+<h1> Welcome!</h1> 
+<h2>   Gems instructions: When you click on a crystal it will add a random amount of points to your  total score.
+To win the game you must match your total score to the number displayed at the start. You will lose the game if your total score goes above the random number.
+Remember ! *hint The amount of points each crystal adds is not shown to the player, but his or her total score is displayed and updated after each crystal is clicked.   </h2>
+
+<p><span id="number"></span></p>
+
+<p><span id="yourNumber"></span></p>
+
+<div id="Gems">
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">
+	$( document ).ready(function() {
+		var numbersToGuess = [20,25,30,35,40,45,50];
+		var counter = 0;
+		
+		
+		var computerGuess = numbersToGuess[Math.floor(Math.random() * numbersToGuess.length)];
+		
+		$	('#number').text(computerGuess); 
+		
+		var Gems = [
+			{
+				src: "assets/images/Gem_1.png",
+				number: (Math.floor(Math.random() * 11) + 1),
+				alt: "Gem #1"
+				
+			},
+			{
+				src: "assets/images/Gem_2.png",
+				number: (Math.floor(Math.random() * 11) + 1),
+				alt: "Gem #2"
+				
+			},
+			{
+				src: "assets/images/Gem_3.png",
+				number: (Math.floor(Math.random() * 11) + 1),
+				alt: "Gem #3"
+				
+			},
+			{
+				src: "assets/images/Gem_4.png",
+				number: (Math.floor(Math.random() * 11) + 1),
+				alt: "Gem #4"
+				
+			}
+		];
+		
+		for(var i=0; i < Gems.length; i++){
+			
+			var imageGems = $('<img>');
+			
+			imageGems.attr('data-num', Gems[i].number);
+		    imageGems.attr('src', Gems[i].src);
+		    imageGems.attr('alt', Gems[i].alt);
+		    imageGems.addClass('Gems');
+			$('#Gems').append(imageGems);
+		}
+		  
+	    $('.Gems').on('click', function(){
+	      counter = counter + parseInt($(this).data('num'));
+	      
+	      $('#yourNumber').text(counter);
+	      if (counter == computerGuess){
+	        alert('You won!!!!');
+	        counter = 0;
+	      }else if( counter > computerGuess){
+	        alert('You lost!');
+	        counter = 0;
+	      }
+	    });
+	    
+	});
+</script>
+</body>
+</html>
